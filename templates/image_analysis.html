@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image-Based Blood Cell Analysis</title>
+
+  <style>
+    /* ===== BACKGROUND VIDEO ===== */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+      background: #000;
+    }
+
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.75);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(2px);
+      z-index: -1;
+    }
+
+    /* ===== PAGE TITLE ===== */
+    h2 {
+      text-align: center;
+      color: #ffdddd;
+      font-size: 2.3rem;
+      margin-top: 30px;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.6);
+    }
+
+    /* ===== GLASS CONTENT BOX ===== */
+    .container {
+      background: rgba(255,255,255,0.10);
+      border-radius: 18px;
+      max-width: 700px;
+      width: 92%;
+      margin: 40px auto;
+      padding: 34px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.18);
+      animation: fadeUp 1.2s ease;
+      text-align: center;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== IMAGE DISPLAY ===== */
+    .img-box {
+      margin: 22px 0;
+    }
+
+    img.blood-img {
+      max-width: 85%;
+      border-radius: 12px;
+      border: 2px solid rgba(255,255,255,0.3);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+    }
+
+    /* ===== ANALYSIS BOX ===== */
+    .analysis {
+      font-size: 1.18rem;
+      background: rgba(255,255,255,0.12);
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: inset 0 0 18px rgba(0,0,0,0.35);
+      line-height: 1.55em;
+      white-space: pre-wrap;
+      text-align: left;
+    }
+
+    /* ===== BUTTON ===== */
+    .btn {
+      display: block;
+      width: fit-content;
+      margin: 32px auto 0;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #d10000, #7a0000);
+      color: #fff;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1rem;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.45);
+      transition: 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      background: linear-gradient(135deg, #ff3333, #9e0000);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<video autoplay muted loop playsinline class="bg-video">
+  <source src="static/Blood_video.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
+<!-- PAGE TITLE -->
+<h2>Blood Cell Image Analysis</h2>
+
+<!-- GLASS PANEL -->
+<div class="container">
+
+  <div class="img-box">
+    <img src="{{ img_url }}" alt="Blood Cell Image" class="blood-img">
+  </div>
+
+  <div class="analysis">
+    {{ result }}
+  </div>
+
+  <a href="/result" class="btn">Back to Analysis</a>
+
+</div>
+
+</body>
+</html>

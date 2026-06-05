@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login — AI Blood Report Analyzer</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .bg-video {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.75);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(2px);
+      z-index: -1;
+    }
+
+    .auth-card {
+      background: rgba(255,255,255,0.12);
+      width: 420px;
+      padding: 38px;
+      border-radius: 18px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.18);
+      animation: fadeUp 1.2s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: #ffdddd;
+      font-size: 2rem;
+      margin-bottom: 22px;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.6);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #ffecec;
+      opacity: 0.85;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #d10000, #7a0000);
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.08rem;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 8px 26px rgba(0,0,0,0.45);
+      transition: 0.25s ease;
+    }
+
+    button:hover {
+      transform: translateY(-4px) scale(1.03);
+      background: linear-gradient(135deg, #ff3333, #9e0000);
+    }
+
+    .link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.95rem;
+    }
+
+    .link a {
+      color: #ffcccc;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .error {
+      text-align: center;
+      color: #ffbaba;
+      margin-bottom: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<video autoplay muted loop playsinline class="bg-video">
+  <source src="/static/Blood_video.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
+<div class="auth-card">
+  <h2>🔐 Login</h2>
+
+  {% if error %}
+    <div class="error">{{ error }}</div>
+  {% endif %}
+
+  <form method="post" action="/login">
+    <input name="username" placeholder="Username" required>
+    <input name="password" type="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+
+  <div class="link">
+    Don’t have an account? <a href="/signup">Sign up</a>
+  </div>
+</div>
+
+</body>
+</html>
